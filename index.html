@@ -58,18 +58,19 @@
    ROOT TOKENS
    ============================================================ */
 :root{
-  --bg-black:#0c0c0c;
-  --bg-charcoal:#161513;
-  --bg-charcoal-2:#1f1d1a;
-  --forest:#14452f;
-  --forest-light:#1e6b47;
-  --forest-glow:rgba(20,69,47,0.45);
-  --gold:#cba868;
-  --gold-soft:#e6d3ab;
-  --beige:#ece3d2;
-  --ivory:#f6f1e7;
-  --text-dim:#b9b3a6;
-  --line:rgba(203,168,104,0.18);
+  --bg-black:#0a0a0a;
+  --bg-charcoal:#15140f;
+  --bg-charcoal-2:#1c1a14;
+  --forest:#2f4a3d;
+  --forest-light:#3f6350;
+  --forest-glow:rgba(47,74,61,0.4);
+  --gold:#c9a96e;
+  --gold-soft:#e3d2ab;
+  --beige:#e9e2d3;
+  --ivory:#f5f2ea;
+  --text-dim:#aba499;
+  --line:rgba(201,169,110,0.16);
+  --accent-red:#a8312f;
   --shadow-deep: 0 30px 60px -20px rgba(0,0,0,0.6);
   --ease: cubic-bezier(.22,.61,.36,1);
 }
@@ -158,7 +159,7 @@ a:focus-visible,button:focus-visible{
   letter-spacing:0.18em;
   color:var(--ivory);
 }
-.logo span{color:var(--gold);}
+.logo span{color:var(--accent-red);}
 .nav-links{display:flex;gap:34px;}
 .nav-links a{
   font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;
@@ -200,7 +201,7 @@ a:focus-visible,button:focus-visible{
    ============================================================ */
 .hero{
   position:relative;height:100vh;min-height:560px;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;align-items:center;justify-content:flex-start;
   overflow:hidden;
 }
 .hero-slides{position:absolute;inset:0;z-index:0;}
@@ -213,38 +214,48 @@ a:focus-visible,button:focus-visible{
 .hero-overlay{
   position:absolute;inset:0;z-index:1;
   background:
-    linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.35) 35%, rgba(10,10,10,0.85) 100%),
-    linear-gradient(90deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.1) 50%, rgba(10,10,10,0.5) 100%);
+    linear-gradient(90deg, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.55) 42%, rgba(8,8,8,0.35) 70%, rgba(8,8,8,0.65) 100%),
+    linear-gradient(180deg, rgba(8,8,8,0.2) 0%, rgba(8,8,8,0.1) 50%, rgba(8,8,8,0.7) 100%);
 }
-.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:780px;}
-.hero-content .eyebrow{display:block;margin-bottom:18px;}
+.hero-content{
+  position:relative;z-index:2;
+  max-width:760px;
+  padding:0 8vw;
+}
+@media (max-width:600px){
+  .hero-content{padding:0 28px;}
+}
 .hero-content h1{
-  font-size:clamp(2.2rem,7vw,4rem);
+  font-size:clamp(2.6rem,8.5vw,6.4rem);
   color:var(--ivory);
-  line-height:1.12;
-  text-shadow:0 6px 30px rgba(0,0,0,0.5);
-}
-.hero-content h1 em{
-  font-style:italic;color:var(--gold-soft);
-}
-.hero-content p{
-  margin-top:20px;color:var(--beige);font-size:clamp(0.95rem,2.4vw,1.15rem);
-  font-weight:300;letter-spacing:0.01em;
+  line-height:0.98;
+  letter-spacing:-0.01em;
+  font-weight:600;
+  text-shadow:0 6px 30px rgba(0,0,0,0.4);
 }
 .hero-cta{
-  margin-top:38px;display:inline-flex;align-items:center;gap:10px;
-  padding:16px 38px;background:var(--forest);
-  border:1px solid var(--forest-light);
-  border-radius:2px;
-  color:var(--ivory);font-size:0.82rem;letter-spacing:0.18em;text-transform:uppercase;
-  transition:transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
-  box-shadow:0 10px 30px -8px var(--forest-glow);
+  position:relative;
+  margin-top:44px;display:inline-flex;align-items:center;
+  padding:17px 44px;
+  background:transparent;
+  border:1px solid var(--gold-soft);
+  border-radius:0;
+  color:var(--ivory);font-size:0.74rem;letter-spacing:0.26em;text-transform:uppercase;
+  overflow:hidden;
+  transition:border-color .45s var(--ease), color .45s var(--ease), letter-spacing .45s var(--ease);
+}
+.hero-cta span{position:relative;z-index:2;}
+.hero-cta::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:var(--gold-soft);
+  transform:translateY(101%);
+  transition:transform .45s var(--ease);
 }
 .hero-cta:hover{
-  transform:translateY(-3px);
-  background:var(--forest-light);
-  box-shadow:0 18px 38px -10px var(--forest-glow);
+  color:var(--bg-black);
+  border-color:var(--gold-soft);
 }
+.hero-cta:hover::before{transform:translateY(0);}
 .hero-scroll{
   position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
   z-index:2;width:22px;height:36px;border:1px solid var(--gold-soft);
@@ -517,16 +528,7 @@ footer .foot-links{display:flex;justify-content:center;gap:24px;margin:18px 0;}
 footer .foot-links a{font-size:0.78rem;color:var(--beige);transition:color .3s;}
 footer .foot-links a:hover{color:var(--gold);}
 
-/* Floating WhatsApp button */
-.float-wa{
-  position:fixed;bottom:22px;right:22px;z-index:900;
-  width:54px;height:54px;border-radius:50%;
-  background:#25D366;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 10px 26px -6px rgba(0,0,0,0.6);
-  transition:transform .3s var(--ease);
-}
-.float-wa:hover{transform:scale(1.08);}
-.float-wa svg{width:28px;height:28px;fill:#fff;}
+
 </style>
 </head>
 <body>
@@ -554,10 +556,8 @@ footer .foot-links a:hover{color:var(--gold);}
   <div class="hero-slides" id="heroSlides"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <span class="eyebrow">North Paravur · Kerala</span>
-    <h1>Feel strong. Feel confident.<br><em>Be unstoppable.</em></h1>
-    <p>A premium, safe, and empowering ladies-only fitness space.</p>
-    <a href="#programs" class="hero-cta">Start Your Journey</a>
+    <h1>A higher standard<br>of fitness.</h1>
+    <a href="#programs" class="hero-cta"><span>Start Your Journey</span></a>
   </div>
   <div class="hero-scroll" aria-hidden="true"></div>
 </section>
@@ -682,10 +682,6 @@ footer .foot-links a:hover{color:var(--gold);}
   </div>
 </footer>
 
-<!-- Floating WhatsApp button (driven by siteData) -->
-<a href="#" id="floatWa" class="float-wa" target="_blank" rel="noopener" aria-label="Message us on WhatsApp">
-  <svg viewBox="0 0 32 32"><path d="M16 2C8.3 2 2 8.3 2 16c0 2.7.7 5.2 2.1 7.4L2 30l6.8-2c2.2 1.2 4.6 1.9 7.2 1.9 7.7 0 14-6.3 14-14S23.7 2 16 2zm0 25.4c-2.3 0-4.5-.6-6.4-1.8l-.5-.3-4 1.2 1.2-3.9-.3-.5C4.6 20.2 4 18.1 4 16 4 9.4 9.4 4 16 4s12 5.4 12 12-5.4 11.4-12 11.4zm6.6-8.6c-.4-.2-2.1-1-2.4-1.2-.3-.1-.6-.2-.8.2-.2.3-.9 1.2-1.2 1.4-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.7.2-.2.3-.4.4-.7.1-.3 0-.5-.1-.7-.1-.2-1-2.4-1.4-3.3-.3-.7-.6-.6-.9-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.2 3.5 5.5 4.7 3.3 1.3 3.3.9 3.9.8.6-.1 2.1-.9 2.4-1.7.3-.8.3-1.5.2-1.7-.1-.2-.3-.3-.7-.5z"/></svg>
-</a>
 
 <script>
 /* ============================================================
@@ -705,9 +701,9 @@ const siteData = {
 
   // Hero background slider images (replace with real studio photos)
   heroSlides: [
-    "https://github.com/Abhishekkrishna-ma/Annfit-studio/blob/main/hero6.webp?raw=true", // gym interior
-    "https://github.com/Abhishekkrishna-ma/Annfit-studio/blob/main/hero5.webp?raw=true", // woman training
-    "https://github.com/Abhishekkrishna-ma/Annfit-studio/blob/main/hero7.webp?raw=true"  // group fitness
+    "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1600&auto=format&fit=crop", // gym interior
+    "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1600&auto=format&fit=crop", // woman training
+    "https://images.unsplash.com/photo-1581009137042-c349d8e09f1a?q=80&w=1600&auto=format&fit=crop"  // group fitness
   ],
 
   // Instagram Story Highlights — replace "#" with real Reel links
@@ -890,9 +886,6 @@ function renderContact(){
       <span class="cta-tag" style="color:#e6d3ab;">Get Directions →</span>
     </a>
   `;
-
-  // Floating WhatsApp button
-  document.getElementById('floatWa').href = waLink;
 }
 
 /* ============================================================
